@@ -31,8 +31,8 @@ module VagrantPlugins
                 sed -i'' '1i 127.0.0.1\\t#{name}\\t#{basename}' /etc/hosts
               }
 
-              # Restart network
-              service network restart
+              # Restart network if not using systemd
+              pidof systemd || service network restart
             EOH
           end
         end
